@@ -19,7 +19,7 @@ int main(void){
   char buf[100], decoded_str[100]; // バッファとデコードされたクエリ
   char *qs = query_string; // クエリ文字列のポインタ
 
-  double height, weight, bmi; // 変数
+  double heiseiEra, year; // 変数
 
   char name[20]; // 名前
 
@@ -45,7 +45,7 @@ int main(void){
     printf("</head>\n");
     printf("<body bgcolor=\"#ffffff\">\n");
 
-    createForm();
+    createForm(); //フォーム作成
 
   }else{ // クエリ有りの場合
 
@@ -68,9 +68,7 @@ int main(void){
 
       strncpy(q->value, decoded_str, (int)sizeof(q->value)/sizeof(char)-1); // q->value に値を入れる
 
-      if(strcmp(q->name, "name") == 0) strncpy(name,q->value,(int)sizeof(name)/sizeof(char)-1); //name に名前を入れる
-      if(strcmp(q->name, "height") == 0) height = atof(q->value); //height に身長を代入
-      if(strcmp(q->name, "weight") == 0) weight = atof(q->value); //weight に体重を代入
+      if(strcmp(q->name, "heiseiEra") == 0) strncpy(name,q->value,(int)sizeof(name)/sizeof(char)-1); //name に名前を入れる
 
 
       qs = query_string; // 切り分けられた残りの文字列の先頭にポインタ qs を設定
@@ -78,10 +76,10 @@ int main(void){
 
     }
 
-    bmi = weight / (height * height);
+    year = heiseiEra + 1989;
 
-    printf("身長: %f 体重 : %f<br>\n", height, weight);
-    printf("%sの BMI は %f です。<br>\n",name, bmi);
+    printf("平成%f年は、<br>\n", heiseiEra);
+    printf(" %f です。<br>\n",year);
 
   }
 
@@ -91,13 +89,11 @@ int main(void){
     return 0;
 }
 
+//フォーム作成
 void createForm(void) {
   printf("<form method=\"GET\" action=\"/cgi-bin/bmi2.cgi\"><p>\n");
-  printf("名前：<input type=\"text\" name=\"name\">\n");
+  printf("平成：<input type=\"text\" name=\"heiseiEra\"> 年\n");
   printf("<br>\n");
-  printf("身長：<input type=\"text\" name=\"height\">\n");
-  printf("<br>\n");
-  printf("体重：<input type=\"text\" name=\"weight\">\n");
   printf("<input type=\"submit\" value=\"送信\">\n");
   printf("<input type=\"reset\" value=\"リセット\">\n");
   printf("</p></form>\n");
