@@ -31,7 +31,7 @@ int main(void){
   printf("<html>\n");
   printf("<head>\n");
   printf("<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\n");
-  printf("<title>BMIの計算</title>\n");
+  printf("<title>平成を西暦に変換</title>\n");
   printf("</head>\n");
   printf("<body bgcolor=\"#ffffff\">\n");
 
@@ -68,7 +68,7 @@ int main(void){
 
       strncpy(q->value, decoded_str, (int)sizeof(q->value)/sizeof(char)-1); // q->value に値を入れる
 
-      if(strcmp(q->name, "heiseiera") == 0) strncpy(name,q->value,(int)sizeof(heiseiera)/sizeof(char)-1); //name に名前を入れる
+      if(strcmp(q->name, "heiseiera") == 0) heiseiera = atof(q->value);
 
 
       qs = query_string; // 切り分けられた残りの文字列の先頭にポインタ qs を設定
@@ -78,8 +78,8 @@ int main(void){
 
     year = heiseiera + 1989;
 
-    printf("平成%f年は、<br>\n", heiseiera);
-    printf(" %f です。<br>\n",year);
+    printf("平成%d年は、<br>\n", (int)heiseiera);
+    printf("西暦 %d年です。<br>\n",(int)year);
 
   }
 
