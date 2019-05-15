@@ -101,4 +101,5 @@ void createForm(void) {
   printf("<input type=\"submit\" value=\"送信\">\n");
   printf("<input type=\"reset\" value=\"リセット\">\n");
   printf("</p></form>\n");
+  return;
 }
