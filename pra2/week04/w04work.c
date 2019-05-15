@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// フォーム作成関数
+void createForm(void);
+
 int main(void){
 
   struct QUERY_STR {
@@ -40,15 +44,8 @@ int main(void){
     printf("<title>BMIの計算</title>\n");
     printf("</head>\n");
     printf("<body bgcolor=\"#ffffff\">\n");
-    printf("<form method=\"GET\" action=\"/cgi-bin/bmi2.cgi\"><p>\n");
-    printf("名前：<input type=\"text\" name=\"name\">\n");
-    printf("<br>\n");
-    printf("身長：<input type=\"text\" name=\"height\">\n");
-    printf("<br>\n");
-    printf("体重：<input type=\"text\" name=\"weight\">\n");
-    printf("<input type=\"submit\" value=\"送信\">\n");
-    printf("<input type=\"reset\" value=\"リセット\">\n");
-    printf("</p></form>\n");
+
+    createForm();
 
   }else{ // クエリ有りの場合
 
@@ -92,4 +89,16 @@ int main(void){
     printf("</html>\n");
 
     return 0;
+}
+
+void createForm(void) {
+  printf("<form method=\"GET\" action=\"/cgi-bin/bmi2.cgi\"><p>\n");
+  printf("名前：<input type=\"text\" name=\"name\">\n");
+  printf("<br>\n");
+  printf("身長：<input type=\"text\" name=\"height\">\n");
+  printf("<br>\n");
+  printf("体重：<input type=\"text\" name=\"weight\">\n");
+  printf("<input type=\"submit\" value=\"送信\">\n");
+  printf("<input type=\"reset\" value=\"リセット\">\n");
+  printf("</p></form>\n");
 }
