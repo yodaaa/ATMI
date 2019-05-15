@@ -19,7 +19,7 @@ int main(void){
   char buf[100], decoded_str[100]; // バッファとデコードされたクエリ
   char *qs = query_string; // クエリ文字列のポインタ
 
-  double heiseiEra, year; // 変数
+  double heiseiera, year; // 変数
 
   char name[20]; // 名前
 
@@ -68,7 +68,7 @@ int main(void){
 
       strncpy(q->value, decoded_str, (int)sizeof(q->value)/sizeof(char)-1); // q->value に値を入れる
 
-      if(strcmp(q->name, "heiseiEra") == 0) strncpy(name,q->value,(int)sizeof(name)/sizeof(char)-1); //name に名前を入れる
+      if(strcmp(q->name, "heiseiera") == 0) strncpy(name,q->value,(int)sizeof(heiseiera)/sizeof(char)-1); //name に名前を入れる
 
 
       qs = query_string; // 切り分けられた残りの文字列の先頭にポインタ qs を設定
@@ -76,9 +76,9 @@ int main(void){
 
     }
 
-    year = heiseiEra + 1989;
+    year = heiseiera + 1989;
 
-    printf("平成%f年は、<br>\n", heiseiEra);
+    printf("平成%f年は、<br>\n", heiseiera);
     printf(" %f です。<br>\n",year);
 
   }
@@ -91,8 +91,8 @@ int main(void){
 
 //フォーム作成
 void createForm(void) {
-  printf("<form method=\"GET\" action=\"/cgi-bin/bmi2.cgi\"><p>\n");
-  printf("平成：<input type=\"text\" name=\"heiseiEra\"> 年\n");
+  printf("<form method=\"GET\" action=\"/cgi-bin/w04work.cgi\"><p>\n");
+  printf("平成：<input type=\"text\" name=\"heiseiera\"> 年\n");
   printf("<br>\n");
   printf("<input type=\"submit\" value=\"送信\">\n");
   printf("<input type=\"reset\" value=\"リセット\">\n");
