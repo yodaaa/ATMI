@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Node.jsチャット</title>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    </head>
+    <body bgcolor="#ffffff" onLoad="init()">
+	<h1>Node.jsチャット</h1>
+	<form name="chat_form">
+	    名前：<input type="text" size=10 id="name">
+	    メッセージ：<input type="text" size=30 id="mesg">
+            <button type="button" id="submitBtn" onclick="post_mesg()">送信</button>
+	<br>
+	</form><hr>
+        <div id="listArea"></div>
+	<script type="text/javascript">
+
+	 // クライアントプログラム
+
+	 // サーバーに接続
+	 var ioSocket = io.connect( "http://192.168.74.129:4000" );
+
+	 // 接続、切断の際は特に何もしない
+	 ioSocket.on( "connect", function() {} ); // 接続
+	 ioSocket.on( "disconnect", function() {} ); // 切断
+
+	 // サーバーからのコールバック
+	 ioSocket.on( "callback", function( data ) { addMesg( data ) });
+
+	 // 投稿を追加
+	 function addMesg( text ) {
+	     var e = document.getElementById("listArea");
+	     e.innerHTML = text + e.innerHTML;
+	 }
+
+	 // 投稿をサーバに送信
+	 function post_mesg() {
+
+             // 投稿を取得し、その後メッセージフォームをクリア
+             var message = document.getElementById("mesg").value;
+             var chat_name = document.getElementById("name").value;
+             document.getElementById("mesg").value = "";
+
+             // サーバへ送信
+             ioSocket.emit( "post_mesg", { "name" : chat_name,  "mesg" : message } );
+	 }
+
+	 // 初期設定 
+	 function init(){
+             ioSocket.emit( "getList", "" ); // 過去のリストを取得
+	 }	     
+
+	</script>
+    </body>
+</html>
